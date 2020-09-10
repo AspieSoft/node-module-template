@@ -1,0 +1,18 @@
+{
+  "name": "${PROJECT_NAME}",
+  "version": "0.0.1",
+  "description": "Package description.",
+  "license": "MIT",
+  "author": "${AUTHOR_NAME}",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/${AUTHOR_NAME}/${PROJECT_NAME}"
+  },
+  "main": "index.js",
+  "keywords": [
+    "nodejs"
+  ],
+  "devDependencies": {
+    "miniforge-js": "^1.0.0"
+  }
+}
