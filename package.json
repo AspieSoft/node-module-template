@@ -13,6 +13,6 @@
     "nodejs"
   ],
   "devDependencies": {
-    "miniforge-js": "^1.0.0"
+    "miniforge-js": "^1.1.0"
   }
 }
