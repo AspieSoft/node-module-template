@@ -1,5 +1,5 @@
 .gitignore
-.git/
-.history/
-.idea/
-node_modules/
+.git
+.idea
+.history
+node_modules
