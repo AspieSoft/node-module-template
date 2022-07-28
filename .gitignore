@@ -2,4 +2,6 @@
 .git
 .idea
 .history
+.vscode
+.svn
 node_modules
