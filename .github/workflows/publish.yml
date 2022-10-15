@@ -1,7 +1,8 @@
 name: Publish
 
 on:
-  workflow_dispatch
+  release:
+    types: [created]
 
 jobs:
   test:
@@ -11,8 +12,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: npm install -g npm
       - run: npm ci
-      - run: node test/index.js
+      - run: node test/run.js --github
 
   publish-npm:
     needs: test
@@ -23,7 +25,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-          scope: ${{secrets.NAME}}
+          scope: aspiesoft
+      - run: npm install -g npm
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -38,10 +41,11 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
           scope: aspiesoft
+      - run: npm install -g npm
       - run: npm publish
         env:
-          AUTHOR_EMAIL: ${{secrets.EMAIL}}
-          AUTHOR_NAME: ${{secrets.NAME}}
+          AUTHOR_EMAIL: aspiesoftweb@gmail.com
+          AUTHOR_NAME: aspiesoft
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   publish-npm-noscope:
@@ -55,8 +59,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: remove scope from package name
         run: |
-          sed -i 's/"name":\s"@${{secrets.NAME}}\//"name":"/g' package.json
-          sed -i 's/"name":\s"@${{secrets.NAME}}\//"name":"/g' package-lock.json
+          sed -i 's/"name":\s"@aspiesoft\//"name":"/g' package.json
+          sed -i 's/"name":\s"@aspiesoft\//"name":"/g' package-lock.json
+      - run: npm install -g npm
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
